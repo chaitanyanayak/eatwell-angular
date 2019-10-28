@@ -13,10 +13,9 @@ export class RecipeListComponent {
     constructor(private recipeService:RecipeService) {}
 
     ngOnInit() {
-        this.recipes = this.recipeService.getRecipes();
-        console.log(this.recipes);
+        this.recipeService.getRecipes().subscribe((recipes: IRecipe[]) => {
+          this.recipes = recipes;
+          console.log(this.recipes);
+        });
     }
-
-    
-
 }
