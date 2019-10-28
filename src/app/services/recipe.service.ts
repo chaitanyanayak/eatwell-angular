@@ -1,52 +1,58 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 import { IRecipe } from '../models/recipe.model';
 
 @Injectable()
 export class RecipeService {
 
-    getRecipes():IRecipe[] {
-        return RECIPES;
-    }
+    // getRecipes():IRecipe[] {
+    //     return RECIPES;
+    // }
 
-    getRecipe(id:number): IRecipe {
-        return RECIPES.find(recipe => recipe.id === id);
-    }
+    // getRecipe(id:number): IRecipe {
+    //     return RECIPES.find(recipe => recipe.id === id);
+    // }
 
-//   constructor(private http:HttpClient) { }
+  constructor(private http:HttpClient) { }
 
-//   getRecipes():Observable<any[]> {
-//       return this.http.get(endpoint)
-//         .pipe(catchError(this.handleError<any[]>('getRecipes',[])))
-//   }
+  getRecipes(): Observable<IRecipe[]> {
+      return this.http.get<IRecipe[]>(endpoint)
+        .pipe(catchError(this.handleError<IRecipe[]>('getRecipes',[])));
+  }
 
-//   add(recipe): Observable<any> {
-//       return this.http.post(endpoint, JSON.stringify(recipe),httpOptions);
-//   }
+  getRecipe(id: number): Observable<IRecipe> {
+    return this.http.get<IRecipe>(`${endpoint}/${id}`)
+      .pipe(catchError(this.handleError<IRecipe>('getRecipes')));
+}
 
-//   private handleError<T> (operation = 'operation', result?: T) {
-//     return (error: any): Observable<T> => {
+  add(recipe): Observable<any> {
+      return this.http.post(endpoint, JSON.stringify(recipe),httpOptions);
+  }
+
+  private handleError<T> (operation = 'operation', result?: T) {
+    return (error: any): Observable<T> => {
   
-//       // TODO: send the error to remote logging infrastructure
-//       console.error(error); // log to console instead
+      // TODO: send the error to remote logging infrastructure
+      console.error(error); // log to console instead
   
-//       // TODO: better job of transforming error for user consumption
-//       console.log(`${operation} failed: ${error.message}`);
+      // TODO: better job of transforming error for user consumption
+      console.log(`${operation} failed: ${error.message}`);
   
-//       // Let the app keep running by returning an empty result.
-//       return of(result as T);
-//     };
-//   }
+      // Let the app keep running by returning an empty result.
+      return of(result as T);
+    };
+  }
 
 }
 
-// const endpoint = 'http://localhost:8080/recipe';
-// const httpOptions = {
-//   headers: new HttpHeaders({
-//     'Content-Type':  'application/json'
-//   })
-// };
+const endpoint = 'api/recipes';
+const httpOptions = {
+  headers: new HttpHeaders({
+    'Content-Type':  'application/json'
+  })
+};
 
 const RECIPES = [
     {
