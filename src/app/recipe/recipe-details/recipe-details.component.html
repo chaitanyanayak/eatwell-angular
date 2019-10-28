@@ -1,0 +1,27 @@
+<div class="container">
+    <h4>Recipe Details</h4>
+    <div class="row">
+        <h2>{{recipe.name}}</h2>
+    </div>
+    <div class="row">
+        <span>{{recipe.description}}</span>
+    </div>
+    <br/>
+    <div class="row">
+        <span>Serving Size : {{recipe.servingsize}}</span>
+    </div>
+    <div class="row">
+        <h4>Instructions</h4>
+    </div>
+    <div class="row" ng-repeat="instr in recipe.instructions">
+        <span>{{$index+1}} . </span>
+        <span>{{instr.instruction}}</span>
+    </div>
+    <div class="row">
+        <h4>Ingredients</h4>
+    </div>
+    <div class="row" ng-repeat="ingr in recipe.ingredients">
+        <span>{{ingr.quantity}}</span>
+        <span>{{ingr.ingredient}}</span>
+    </div>
+</div>
