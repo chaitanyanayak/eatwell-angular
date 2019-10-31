@@ -27,7 +27,7 @@ export class RecipeService {
       .pipe(catchError(this.handleError<IRecipe>('getRecipes')));
 }
 
-  add(recipe): Observable<any> {
+  addRecipe(recipe): Observable<any> {
       return this.http.post(endpoint, JSON.stringify(recipe),httpOptions);
   }
 

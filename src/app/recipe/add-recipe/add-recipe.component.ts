@@ -1,36 +1,27 @@
-import { Component } from '@angular/core';
-import { RecipeService } from 'src/app/services/recipe.service';
-import { IRecipe } from 'src/app/models/recipe.model';
+import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
+import { RecipeService } from './../../services/recipe.service';
 
 @Component({
-  selector: 'recipe',
-  templateUrl: './recipe.component.html'
+  selector: 'app-add-recipe',
+  templateUrl: './add-recipe.component.html',
+  styleUrls: ['./add-recipe.component.scss']
 })
-export class RecipeComponent {
+export class AddRecipeComponent implements OnInit {
 
-    recipe: IRecipe;
+  recipeForm = new FormGroup({
+    name: new FormControl(''),
+    description: new FormControl('')
+  })
 
-    showRecipes: boolean = true;
-    message: string = "Loading Recipes . . . ";
-        
-    editRecipe: boolean = false;
+  constructor(private recipeService:RecipeService) { }
 
-    constructor(private recipeService: RecipeService) { }
+  ngOnInit() {
+  }
 
-    add():void {
-        //this.recipeService.add(this.recipe);
-    };
-
-    enableEditRecipe():void {
-        this.editRecipe = true;
-    };
-
-    updateRecipe():void {
-        this.editRecipe = false;
-    };
-
-    cancelEdit = function () {
-        this.editRecipe = false;
-    }
+  onSubmit(){
+    console.log(this.recipeForm.value);
+    this.recipeService.addRecipe(this.recipeForm.value).subscribe();
+  }
 
 }
