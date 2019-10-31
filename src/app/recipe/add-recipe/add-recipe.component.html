@@ -1,39 +1,16 @@
-<div class="row">
-    <span class="field-name col-xs-3"></span>
-    <span class="col-xs-3">
-<button class="btn btn-xs btn-primary pull-right" type="button" ng-click="enableEditRecipe()">Edit Recipe</button></span>
-    <span class="col-xs-3">
-<button class="btn btn-xs btn-primary pull-right" type="button" ui-sref="app.recipelist">Back to Recipes</button></span>
-</div>
-<div class="row">
-    <h2>{{recipe.name}}</h2>
-</div>
-<div class="row">
-    <span>{{recipe.description}}</span>
-</div>
-<br/>
-<div class="row">
-    <span>Serving Size : {{recipe.servingsize}}</span>
-</div>
-<div class="row">
-    <h4>Instructions</h4>
-</div>
-<div class="row" ng-repeat="instr in recipe.instructions">
-    <span>{{$index+1}} . </span>
-    <span>{{instr.instruction}}</span>
-</div>
-<div class="row">
-    <h4>Ingredients</h4>
-</div>
-<div class="row" ng-repeat="ingr in recipe.ingredients">
-    <span>{{ingr.quantity}}</span>
-    <span>{{ingr.ingredient}}</span>
-</div>
-<div class="row">
-    <span class="field-name col-xs-3"></span>
-    <span class="col-xs-3">
-<button class="btn btn-xs btn-primary pull-right" type="button" ng-click="enableEditRecipe()">Edit Recipe</button></span>
-    <span class="col-xs-3">
-<button class="btn btn-xs btn-primary pull-right" type="button" ui-sref="app.recipelist">Back to All Recipes</button></span>
-</div>
+<div class="container">
+    <div class="row">
+        <div class="col12"><h4>Add Recipe</h4></div>
+    </div>
+    <form [formGroup]="recipeForm" (ngSubmit)="onSubmit()">
+        <div class="row">
+            <div class="col3">Name: </div>
+            <div class="col9"><input type="text" formControlName="name"/></div>
+        </div>
+        <div class="row">
+            <div class="col3">Description: </div>
+            <div class="col9"><input type="text" formControlName="description"/></div>
+        </div>
+        <button type="submit" [disabled]="!recipeForm.valid">Submit</button>
+    </form>
 </div>

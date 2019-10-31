@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { NavBarComponent } from './nav/nav-bar.component';
@@ -10,6 +11,7 @@ import { RecipeService } from './services/recipe.service';
 import { HttpClientModule } from '@angular/common/http';
 import { RecipeThumbnailComponent } from './recipe/recipe-list/recipe-thumbnail.component';
 import { RecipeListComponent } from './recipe/recipe-list/recipe-list.component';
+import { AddRecipeComponent } from './recipe/add-recipe/add-recipe.component';
 
 @NgModule({
   declarations: [
@@ -17,12 +19,14 @@ import { RecipeListComponent } from './recipe/recipe-list/recipe-list.component'
     NavBarComponent,
     RecipeListComponent,
     RecipeThumbnailComponent,
-    RecipeDetailsComponent
+    RecipeDetailsComponent,
+    AddRecipeComponent
   ],
   imports: [
     BrowserModule,
     RouterModule.forRoot(appRoutes),
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [RecipeService],
   bootstrap: [AppComponent]
